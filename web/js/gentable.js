@@ -5,7 +5,6 @@ var retval = [];
 var yearSemester = [];
 var nowYear = "2018";
 var nowSemester = "second";
-var stdID = "5830138021"
 
 $(document).ready(function(){
 
@@ -28,23 +27,50 @@ $(document).ready(function(){
   $("#studentIDAssignGrade").on("keyup",function() {filterTable("studentIDAssignGrade","assignGradeTable",1)});
   $("#eduOfStuID").on("keyup",function() {filterTable("eduOfStuID","educationStudentTable",1)});
 
-  genTableEduHeader();
-  genEducationTeacherTable();
-  genTranscriptTable("completedTable");
-  genTranscriptTable("progressTable");
+  // genProfile()
+  // genTableEduHeader();
+  // genEducationTeacherTable();
+  // genTranscriptTable("completed");
+  // genTranscriptTable("progressTable");
 }); //End document ready
 
 function startFunction(){
   $.get("http://localhost:8080/login/getuserid",function(data,status){
-    var username = data['username'];
-    $("#id").text($("#id").text()+username);
-    console.log(username);
+    // var username = data['username'];
+    $("#id").text(data['username']);
+    // console.log(username);
     // document.getElementById('id').innerHTML = username;
   });
 }
 
-function genTableRegister() {
+function genProfile(){
+  $("#bodyTableRegister").empty();
+  var stdID = $('#id').text();
+  var tablehead = ["IDNo","Fname","Lname","StudentID","Sex","BirthDate","Address","PhoneNo"];
+  var buffer = [];
+  var rowcount = 0;
+  $.post("http://localhost:8080/student/search",{
+    item: stdID,
+    filter:"StudentID",
+    table: "Student natural join Person",
+    searchtype: "filter-search"
+  },function(data,status){
+    // if return data error then drop it and alert
+    console.log(data);
+    if (data=='error') {
+      alert("query error.");
+      return;
+    }
+    if (data=='empty') {
+      alert("Course Not Found");
+      return;
+    }
+  })
+}
+
+function genTableRegister(){
     event.preventDefault();
+    var stdID = $('#id').text();
     $("#bodyTableRegister").empty();
     var tablehead = ["#","CourseNo","CourseName","Section","Credit","Grade"];
     var buffer = [];
@@ -106,6 +132,7 @@ function genTableRegister() {
 
 function genTableWithdrawn() {
     event.preventDefault();
+    var stdID = $('#id').text();
     $("#bodyTableWithdrawn").empty();
     var tablehead = ["#","CourseNo","CourseName","Section","Credit"];
     var buffer = [];
@@ -180,6 +207,7 @@ function withdrawnOperation() {
 function genTableEduHeader(){
   // event.preventDefault();
   // $("#eduResTable").empty();
+  var stdID = $('#id').text();
   console.log('bin',stdID);
   var tablehead = ["Yyear","Semester"];
   var buffer = [];
@@ -216,6 +244,7 @@ function genTableEduHeader(){
           yearSemester.push(data[z][tablehead[1]]);
       }
       genTableEduContent();
+      genTranscriptTable("completedTable");
   });
 }
 function genTableEduContent(){
@@ -323,7 +352,6 @@ function genEducationTeacherTable(){
 }
 function genTranscriptTable(table){
   var tablehead = ["CourseNo","CourseName","Credit","Grade"];
-  var tablehead1 = ["Credit","Cumulative Credit","GPA","GPAX"];
   var buffer = [];
   var num = 0;
   for(var i=0;i<yearSemester.length;i+=2){
@@ -341,14 +369,17 @@ function genTranscriptTable(table){
       alert("Education Result Not Found");
       return;
     }
-    num+=1;
+    console.log(data[0][tablehead[0]]);
     for(var z=0; z<data.length; z+=1) {
         // Gen tableRegister
-        $("#completedTable"+(num-1)).append('<tr><td>'+data[z][tablehead[0]]+'</td>\
-                               <td>'+data[z][tablehead[1]]+'</td>\
-                               <td>'+data[z][tablehead[2]]+'</td>\
-                               <td>'+data[z][tablehead[3]]+'</td></tr>');
+        var term = "1";
+        if (yearSemester[num*2+1] == "second"){ term = "2";}
+        $("#"+table).append('<tr><td class="borderless">'+term+'/'+yearSemester[num*2]+'</td>\
+                               <td class="borderless">'+data[z][tablehead[0]]+'</td>\
+                               <td class="borderless">'+data[z][tablehead[1]]+'</td>\
+                               <td class="borderless">'+data[z][tablehead[2]]+'</td></tr>');
       }
+      num+=1;
     });
   }
 }

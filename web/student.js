@@ -28,7 +28,6 @@ router.post('/callPrintDetail', function(req,res){
   let studentID = req.body.studentID;
   let year = req.body.year;
   let semester = req.body.semester;
-  console.log('call rpprpr')
   let callQuery = `call printDetail('${studentID}','${year}','${semester}');`;
   console.log(callQuery);
   con.query(callQuery, function(err, callresult) {
