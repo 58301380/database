@@ -322,12 +322,35 @@ function genEducationTeacherTable(){
                                 </tr>`);
 }
 function genTranscriptTable(table){
-    $('#'+table).append(`<tr>\
-                          <td>01/01/2018</td>\
-                          <td>211001</td>\
-                          <td>Intro to database</td>\
-                          <td>3</td>\
-                        </tr>`);
+  var tablehead = ["CourseNo","CourseName","Credit","Grade"];
+  var tablehead1 = ["Credit","Cumulative Credit","GPA","GPAX"];
+  var buffer = [];
+  var num = 0;
+  for(var i=0;i<yearSemester.length;i+=2){
+  $.post("http://localhost:8080/student/callPrintDetail",{
+    studentID: stdID,
+    year: yearSemester[i],
+    semester: yearSemester[i+1]
+  },function(data,status){
+    // if return data error then drop it and alert
+    if (data=='error') {
+      alert("query error.");
+      return;
+    }
+    if (data=='empty') {
+      alert("Education Result Not Found");
+      return;
+    }
+    num+=1;
+    for(var z=0; z<data.length; z+=1) {
+        // Gen tableRegister
+        $("#completedTable"+(num-1)).append('<tr><td>'+data[z][tablehead[0]]+'</td>\
+                               <td>'+data[z][tablehead[1]]+'</td>\
+                               <td>'+data[z][tablehead[2]]+'</td>\
+                               <td>'+data[z][tablehead[3]]+'</td></tr>');
+      }
+    });
+  }
 }
 
 function filterTable(inputVal,tableVal,column) {
