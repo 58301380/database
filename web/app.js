@@ -6,6 +6,8 @@ var app = express();
 var server = http.createServer(app);
 var bodyParser = require('body-parser');
 var studentData = require('./student');
+var adminpage = require('./admin');
+var session = require('express-session');
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -15,11 +17,21 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(session({
+  secret: "im",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {maxAge: 60*10*1000}
+}));
+
+app.use('/admin',adminpage);
 app.use('/student',studentData);
+app.use('/login',require('./login'));
 
 // Only LocalHost
-app.use('/student/vendor', express.static('vendor'));
-app.use('/student/js', express.static('js'));
+app.use('/*/vendor', express.static('vendor'));
+app.use('/*/js', express.static('js'));
 app.use('/vendor', express.static('vendor'));
 app.use('/css',express.static('css'));
 app.use('/js',express.static('js'));

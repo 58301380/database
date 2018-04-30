@@ -25,6 +25,36 @@
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="/js/gentable.js"></script>
+  <script>
+    window.onload = function(){
+      startFunction();
+      // var stdID = $('#id').text();
+      // alert(stdID);
+      // $("#withdrawnBtn").click(function(){
+      //   event.preventDefault();
+      //     // function Check used
+      //     if(usedWithdrawn.indexOf($("#WidthdrawnCourseID").val())>-1) {alert("Data already withdrawn");return;}
+      //     alert("Withdrawn course success");
+      //     withdrawnOperation(stdID);
+      //     genTableRegister(stdID);
+      //     genTableWithdrawn(stdID)
+      //       //need change W function !!!!!
+      //       usedWithdrawn.push($("#WidthdrawnCourseID").val());
+      //
+      // });
+      //
+      // $("#WidthdrawnCourseID").on("keyup", function() {
+      //   filterTable("WidthdrawnCourseID","bodyTableWithdrawn",1);});
+      //
+      // $("#studentIDAssignGrade").on("keyup",function() {filterTable("studentIDAssignGrade","assignGradeTable",1)});
+      // $("#eduOfStuID").on("keyup",function() {filterTable("eduOfStuID","educationStudentTable",1)});
+      //
+      // genTableEduHeader(stdID);
+      // genEducationTeacherTable(stdID);
+      // genTranscriptTable(stdID,"completedTable");
+      // genTranscriptTable(stdID,"progressTable");
+    };
+  </script>
   <style>
   .borderless{
     border:hidden;
@@ -132,11 +162,11 @@
             <div class="resume-content" style=" width: 921.14px;">
               <h3 style="font-size:200%;white-space:pre">Firstname   Lastname</h3>
               <hr></hr>
-                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;">ID Number : 1101402132249</div>
-                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;">Sex : gender</div>
-                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;">Birth Date : 1/1/2540</div>
-                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;">Address : 112 m.6 10400</div>
-                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;">Phone Number : 0917497492</div>
+                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="id">ID Number : </div>
+                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="sex">Sex : gender</div>
+                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="birthDate">Birth Date : 1/1/2540</div>
+                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="address">Address : 112 m.6 10400</div>
+                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="phoneNumber">Phone Number : 0917497492</div>
             </div>
           </div>
 
@@ -157,7 +187,7 @@
               </div>
               <div class="col-md-5 mb-3">
                 <label for="validationCourse">Course Number</label>
-                <input type="text" name="CourseID" class="form-control" id="validationCourse" placeholder="Course No." value="" required>
+                <input type="text" name="CourseNo" class="form-control" id="validationCourse" placeholder="Course No." value="" required>
                 <div class="valid-feedback">
                   OK!
                 </div>
@@ -207,6 +237,7 @@
                   else {
                     event.preventDefault();
                     genTableRegister();
+                    genTableWithdrawn();
                   }
                   form.classList.add('was-validated');
                 }, false);
@@ -230,14 +261,14 @@
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>Course Registered</th>
+                  <th>Course Number</th>
                   <th>Course Name</th>
                   <th>Section</th>
                   <th>Credit</th>
                   <th>Grade</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="bodyTableRegister">
 
               </tbody>
               </table>
@@ -284,13 +315,13 @@
                 <thead>
                 <tr>
                   <th>#</th>
-                  <th>Course Registered</th>
+                  <th>Course Number</th>
                   <th>Course Name</th>
                   <th>Section</th>
                   <th>Credit</th>
                 </tr>
               </thead>
-              <tbody id="myTable">
+              <tbody id="bodyTableWithdrawn">
 
               </tbody>
               </table>

@@ -1,0 +1,124 @@
+<!DOCTYPE>
+<html>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    window.onload = function() {
+
+    }
+    // this not use now!
+    $(document).ready(function(){
+      $("#loginButton").click(function(){
+        event.preventDefault();
+        console.log("HERE");
+        if ( $("#usernameField").val() == '' ) {
+          alert("Username can't be \"undefined\"!");
+          return;
+        }
+
+        if ( $("#passwordField").val() == '' ) {
+          alert("Password can't be \"undefined\"!");
+          return;
+        }
+
+        if ( $("#typeSelection").val() == 'none' ) {
+          alert("Type can't be \"undefined\"!");
+          return;
+        }
+
+        $.post("http://localhost:8080/login/submit",{
+          username: $("#usernameField").val(),
+          password: $("#passwordField").val(),
+          usertype: $("#typeSelection").val()
+        },function(data, status){
+          console.log(status);
+          if (data == "success") {
+            var privilege = $("#typeSelection");
+            // redirect here!
+            // window.location.href='/login/student2';
+            $.post("http://localhost:8080/login/student2",{
+              id: $("#usernameField").val()
+            },function(data2,status2){
+              // where passing value
+
+              // localStorage.setItem("username",$("#usernameField").val());
+
+
+              alert("send GET");
+              console.log("data:",data2,":");
+            });
+          }
+          else{
+            alert("Wrong id or password");
+          }
+        });
+
+
+      });
+    });
+  </script>
+
+  <style>
+    /* Bordered form */
+    form {
+      border: 3px solid #f1f1f1;
+    }
+
+    /* Full-width inputs */
+    input[type=text], input[type=password] {
+      width: 60%;
+      padding: 11px 20px;
+      margin: 8px 0;
+      display: grid;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    /* Set a style for all buttons */
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 20%;
+    }
+
+    /* Add a hover effect for buttons */
+    button:hover {
+      opacity: 0.8;
+    }
+
+    /* Add padding to containers */
+    .container {
+      padding: 16px;
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5px auto; /* 15% from the top and centered */
+      border: 1px solid #888;
+      width: 400px; /* Could be more or less, depending on screen size */
+      height: 200px; /* new: */
+      /* old: width 30% height 33% */
+    }
+
+  </style>
+
+
+  <form class="modal-content"method="post" action="/login/submit">
+    <div class="container">
+      <input placeholder="Username" required name="username" id="usernameField" value="5830138021" type="text">
+      <input placeholder="Password" required name="password" id="passwordField" value="0000" type="password">
+      <select name="usertype" id="typeSelection">
+        <option value="none">choose one</option>
+        <option selected value="student">Student</option>
+        <option value="personnel">Personnel</option>
+        <option value="administrator">Administrator</option>
+      </select><br>
+      <input type="submit" >Login</button>
+      <!-- id="loginButton" -->
+    </div>
+  </form>
+</html>

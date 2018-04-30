@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Admission</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+  <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/vendor/devicons/css/devicons.min.css" rel="stylesheet">
+  <link href="/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/resume.min.css" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="/js/gentable.js"></script>
+
+</head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <span class="d-block d-lg-none">SUDO</span>
+        <span class="d-none d-lg-block">
+          <!-- <img class="img-fluid mx-auto mb-2" src="img/admission.png" alt=""> -->
+          <div class="container-fluid mx-auto">
+          <h2 class="mb-0">Su<span style="color:#ddddd0">do</span>
+          </h2>
+          <hr style="border-width:3px;"></hr>
+        </div>
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#display">Display</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#remove">Remove</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#add">Add</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid p-0">
+      <section class="resume-section p-3 p-lg-5 d-column d-flex flex-column" id="home">
+        <div class="my-auto">
+          <h1 class="mb-2">Warning!</h1>
+          <h3 class="mb-0">Unauthorized access is strictly prohibited.</h3>
+        </div>
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="display">
+        <div class="my-auto">
+          <h2 class="mb-5">sudo display</h2>
+          <h3 class="mb-2" id="table-name"></h3>
+          <div class="form-row" style="margin-left:25px;">
+            <div class="col-2 mb-4">
+              <input type="text" class="form-control" id="item-field-search" placeholder="item name" value="" required>
+            </div>
+            <div class="col-2 mb-4">
+              <input type="text" class="form-control" id="filter-field-search" placeholder="filter name" value="" required>
+            </div>
+            <div class="col-2 mb-4">
+              <input type="text" class="form-control" id="table-field-search" placeholder="table name" value="" required>
+            </div>
+            <input class="btn btn-outline-info" type="submit" style="margin-left:5px;height:38px;"
+            id="search-button" value="Search">
+            <input class="btn btn-outline-info" type="submit" style="margin-left:5px;height:38px;"
+            id="show-all-button" value="Show all">
+          </div><br>
+
+          <div class="container">
+            <div class="table-responsive">
+              <table id="display-table" class="table table-hover">
+                <thead>
+                  <!-- create null-header to wait for generating table -->
+                  <tr>
+                    <th id="table-head-0"></th>
+                    <th id="table-head-1"></th>
+                    <th id="table-head-2"></th>
+                    <th id="table-head-3"></th>
+                    <th id="table-head-4"></th>
+                    <th id="table-head-5"></th>
+                    <th id="table-head-6"></th>
+                    <th id="table-head-7"></th>
+                    <th id="table-head-8"></th>
+                    <th id="table-head-9"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="remove">
+        <div class="my-auto">
+          <h2 class="mb-5">sudo remove</h2>
+
+          <div class="form-row" style="margin-left:25px;">
+            <div class="col-2 mb-4">
+              <input type="text" class="form-control" id="item-field-delete" placeholder="item name" value="" required>
+            </div>
+            <div class="col-2 mb-4">
+              <input type="text" class="form-control" id="filter-field-delete" placeholder="filter name" value="" required>
+            </div>
+            <div class="col-2 mb-4">
+              <input type="text" class="form-control" id="table-field-delete" placeholder="table name" value="" required>
+            </div>
+
+
+            <input class="btn btn-outline-info" type="submit" style="margin-left:5px;height:38px;"
+            id="delete-button" value="Delete">
+          </div>
+
+        </div>
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="add">
+        <!-- the form below this commend stand for
+        reset button to reset all input field -->
+        <form>
+          <div class="my-auto">
+            <h2 class="mb-5">sudo add</h2>
+            <div class="col-3 mb-3" style="margin-left:15px;">
+              <input list="usertype-field-list" class="form-control" id="usertype-field-insert" placeholder="Select Type" required>
+              <datalist id="usertype-field-list">
+                <!-- disabled selected  can be used together with 'hidden' -->
+                <option disabled selected hidden value="Select Type">
+                <option value="Candidate">
+                <option value="Student">
+                <option value="Teacher">
+              </datalist>
+            </div>
+            <div class="form-row" style="margin-left:25px;">
+              <div class="col-3  mb-4">
+                <input type="text" class="form-control" id="idno-field-insert" placeholder="ID Number : 10 digits" value="" required>
+              </div>
+              <div class="col-2 mb-4">
+                <input type="text" class="form-control" id="fname-field-insert" placeholder="First name" value="" required>
+              </div>
+              <div class="col-2 mb-4">
+                <input type="text" class="form-control" id="lname-field-insert" placeholder="Last name" value="" required>
+              </div>
+              <div class="col-2 mb-4">
+                <input list="sex-field-list" class="form-control" id="sex-field-insert" placeholder="Sex" required>
+                <datalist id="sex-field-list">
+                  <option value="M">
+                  <option value="F">
+                </datalist>
+              </div>
+              <div class="col-2 mb-4">
+                <input type="text" class="form-control" id="phoneno-field-insert" placeholder="Phone Number" value="" required>
+              </div>
+            </div>
+            <div class="form-row" style="margin-left:25px;">
+              <div class="col-3 mb-4">
+                <input type="text" class="form-control" id="id-field-insert" placeholder="The ID : 10 digits" value="" required>
+              </div>
+              <div class="col-3 mb-4">
+                <input type="text" class="form-control" id="bdate-field-insert" placeholder="Birthdate : yyyy-mm-dd" value="" required>
+              </div>
+              <div class="col-3 mb-4">
+                <input type="text" class="form-control" id="address-field-insert" placeholder="Address" value="" required>
+              </div>
+              <div class="col-2 mb-4">
+                <input type="text" class="form-control" id="salary-field-insert" placeholder="Salary" value="" required disabled>
+              </div>
+            </div>
+            <div class="form-row" style="margin-left:25px;">
+              <div class="col-3 mb-4">
+                <input type="text" class="form-control" id="password-field-insert" placeholder="Password" value="" required>
+              </div>
+              <div class="col-2 mb-4">
+                <input type="text" class="form-control" id="grade-field-insert" placeholder="Grade" value="" required disabled>
+              </div>
+              <div class="col-2 mb-4">
+                <input type="text" class="form-control" id="register-type-field-insert"
+                placeholder="Register Type" value="" required disabled>
+              </div>
+              <div class="col-2 mb-4">
+                <input list="faculty-field-list" class="form-control" id="faculty-field-insert" placeholder="Faculty" value="" required>
+                <datalist id="faculty-field-list">
+                  <!-- disabled selected  can be used together with 'hidden' -->
+                  <option disabled selected hidden value="-Faculty-">
+                  <option value="Education">
+                  <option value="Psychology">
+                  <option value="Dentistry">
+                  <option value="Law">
+                  <option value="Communication Arts">
+                  <option value="Nursing">
+                  <option value="Commerce and Accountancy">
+                  <option value="Medicine">
+                  <option value="Pharmaceutical Sciences">
+                  <option value="Political Science">
+                  <option value="Science">
+                  <option value="Sports Science">
+                  <option value="Engineering">
+                  <option value="Fine and Applied Arts">
+                  <option value="Economics">
+                  <option value="Architecture">
+                  <option value="Allied Health Sciences">
+                  <option value="Veterinary Science">
+                  <option value="SAR">
+                </datalist>
+              </div>
+              <div class="col-2 mb-4">
+                <input list="department-field-list" class="form-control" id="department-field-insert" placeholder="Department" value="" required>
+                <datalist id="department-field-list">
+                  <option hidden selected hidden value="Department">
+                  <option value="candidate">
+                  <option value="student">
+                  <option value="teacher">
+                </datalist>
+              </div>
+            </div>
+            <div class="form-row" style="margin-left:25px;">
+              <input class="btn btn-outline-info" type="submit" style="margin-left:5px;height:38px;"
+              id="insert-button" value="Insert">
+              <input class="btn btn-outline-info" type="reset" style="margin-left:5px;height:38px;"
+              id="reset-button" value="Reset">
+            </div>
+          </div>
+        </form>
+      </section>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/resume.min.js"></script>
+
+    <!-- Addition scripts for button -->
+    <script>
+      // buffer variable for display function
+      var tablename = '';
+      var tablehead = [];
+      var buffer = [];
+      var rowcount = 0;
+
+      // when usertype is changed from candidate
+      // disable grade and register type field
+      // coz only candidate be able to use it
+      $("#usertype-field-insert").change(function(){
+        if ($("#usertype-field-insert").val()=='Candidate') {
+           $("#grade-field-insert").prop('disabled', false);
+           $("#register-type-field-insert").prop('disabled', false);
+        }
+        else {
+           $("#grade-field-insert").val('');
+           $("#register-type-field-insert").val('');
+           $("#grade-field-insert").prop('disabled', true);
+           $("#register-type-field-insert").prop('disabled', true);
+        }
+
+        if ($("#usertype-field-insert").val()=='Teacher') $("#salary-field-insert").prop('disabled', false);
+        else $("#salary-field-insert").prop('disabled', true);
+
+      });
+
+      // click search button
+      $(document).ready(function(){
+        $("#search-button").click(function(){
+          event.preventDefault();
+
+          if ( $("#item-field-search").val()=='' || $("#filter-field-search").val()=='' || $("#table-field-search").val()=='' ) {
+           alert("Insert all 3 boxes to use 'search' function.");
+           return;
+          }
+
+          $.post("http://localhost:8080/admin/search",{
+            item:  $("#item-field-search").val(),
+            filter:$("#filter-field-search").val(),
+            table: $("#table-field-search").val(),
+            searchtype: "filter-search"
+          },function(data,status){
+            // if return data error then drop it and alert
+            if (data=='error') {
+              alert("query error.");
+              return;
+            }
+            if (data=='empty') {
+              alert("No match row.");
+              return;
+            }
+            // if not same table reset head
+            if (tablename!=$("#table-field-search").val()) {
+
+              // reset rowcount and tablehead buffer
+              rowcount = 0;
+              tablehead = [];
+
+              // data[0] is sample row
+              // we pick it here to get tablehead
+              for(x in data[0]){
+                tablehead.push(x);
+              }
+              console.log(tablehead);
+              // reset all 10 column tablehead to blank
+              $("#display-table thead").html(
+                '<tr><th id="table-head-0"></th>'
+                  +'<th id="table-head-1"></th>'
+                  +'<th id="table-head-2"></th>'
+                  +'<th id="table-head-3"></th>'
+                  +'<th id="table-head-4"></th>'
+                  +'<th id="table-head-5"></th>'
+                  +'<th id="table-head-6"></th>'
+                  +'<th id="table-head-7"></th>'
+                  +'<th id="table-head-8"></th>'
+                  +'<th id="table-head-9"></th></tr>'
+              );
+
+              for(var i=0; i<tablehead.length; i+=1) {
+                $("#table-head-"+i).html(tablehead[i]);
+              }
+
+              // clear table body and rememorize table name
+              $("#display-table tbody").html('');
+              tablename = $("#table-field-search").val();
+            }
+
+            // for each object in data > data[z]
+            for(var z=0; z<data.length; z+=1) {
+
+              var exist = true;
+              // if not 'all member of object data[z] already in table'
+              for(var x=0; x<buffer.length; x+=1) {
+                if (buffer[x] != data[z][tablehead[0]]) exist = false;
+              }
+
+              // if no any object in buffer that mean nothing has ever in table
+              if (buffer.length<1) exist = false;
+
+              if (!exist) {
+                // then append a blank row
+                $("#display-table").append(
+                '<tr><td id="td-'+rowcount+'-0"></td>'
+                  +'<td id="td-'+rowcount+'-1"></td>'
+                  +'<td id="td-'+rowcount+'-2"></td>'
+                  +'<td id="td-'+rowcount+'-3"></td>'
+                  +'<td id="td-'+rowcount+'-4"></td>'
+                  +'<td id="td-'+rowcount+'-5"></td>'
+                  +'<td id="td-'+rowcount+'-6"></td>'
+                  +'<td id="td-'+rowcount+'-7"></td>'
+                  +'<td id="td-'+rowcount+'-8"></td>'
+                  +'<td id="td-'+rowcount+'-9"></td></tr>'
+                );
+
+                // loop to change each data cell in blank row
+                for(var i=0; i<tablehead.length; i+=1) {
+                  $('#td-'+rowcount+'-'+i).html(data[z][tablehead[i]]);
+                }
+
+                // push to buffer to memorize it already in table
+                buffer.push(data[z][tablehead[0]]);
+                rowcount +=1;
+              }
+              else {
+                  alert("This row is already exist in the table!");
+              }
+            }
+          });
+
+        });
+
+        $("#show-all-button").click(function(){
+          event.preventDefault();
+
+          if ( $("#table-field-search").val()=='' ) {
+           alert("Insert 'table' box to use 'show all' function.");
+           return;
+          }
+
+          $.post("http://localhost:8080/admin/search",{
+            item:  $("#item-field-search").val(),
+            filter:$("#filter-field-search").val(),
+            table: $("#table-field-search").val(),
+            searchtype: "display-all"
+          },function(data,status){
+            // if return data error then drop it and alert
+            if (data=='error') {
+              alert("query error");
+              return;
+            }
+
+            // reset rowcount and tablehead buffer
+            rowcount = 0;
+            tablehead = [];
+            buffer = [];
+            // data[0] is sample row
+            // we pick it here to get tablehead
+            for(x in data[0]){
+              tablehead.push(x);
+            }
+            console.log(tablehead);
+            // reset all 10 column tablehead to blank
+            $("#display-table thead").html(
+                '<tr><th id="table-head-0"></th>'
+                  +'<th id="table-head-1"></th>'
+                  +'<th id="table-head-2"></th>'
+                  +'<th id="table-head-3"></th>'
+                  +'<th id="table-head-4"></th>'
+                  +'<th id="table-head-5"></th>'
+                  +'<th id="table-head-6"></th>'
+                  +'<th id="table-head-7"></th>'
+                  +'<th id="table-head-8"></th>'
+                  +'<th id="table-head-9"></th></tr>'
+              );
+              for(var i=0; i<tablehead.length; i+=1) {
+              $("#table-head-"+i).html(tablehead[i]);
+            }
+              // clear table body and rememorize table name
+            $("#display-table tbody").html('');
+            tablename = $("#table-field-search").val();
+
+            // for each object in data > data[z]
+            for(var z=0; z<data.length; z+=1) {
+              // then append a blank row
+              $("#display-table").append(
+                  '<tr><td id="td-'+rowcount+'-0"></td>'
+                    +'<td id="td-'+rowcount+'-1"></td>'
+                    +'<td id="td-'+rowcount+'-2"></td>'
+                    +'<td id="td-'+rowcount+'-3"></td>'
+                    +'<td id="td-'+rowcount+'-4"></td>'
+                    +'<td id="td-'+rowcount+'-5"></td>'
+                    +'<td id="td-'+rowcount+'-6"></td>'
+                    +'<td id="td-'+rowcount+'-7"></td>'
+                    +'<td id="td-'+rowcount+'-8"></td>'
+                    +'<td id="td-'+rowcount+'-9"></td></tr>'
+                );
+              // loop to change each data cell in blank row
+              for(var i=0; i<tablehead.length; i+=1) {
+                $('#td-'+rowcount+'-'+i).html(data[z][tablehead[i]]);
+              }
+              // push to buffer to memorize it already in table
+              buffer.push(data[z][tablehead[0]]);
+              rowcount +=1;
+            }
+
+          });
+
+        });
+
+        $("#delete-button").click(function(){
+          event.preventDefault();
+
+          if ( $("#item-field-delete").val()=='' || $("#filter-field-delete").val()=='' || $("#table-field-delete").val()=='' ) {
+           alert("Insert all 3 boxes to use 'delete' function.");
+           return;
+          }
+
+          $.post("http://localhost:8080/admin/delete",{
+            item:  $("#item-field-delete").val(),
+            filter:$("#filter-field-delete").val(),
+            table: $("#table-field-delete").val()
+          },function(data,status){
+            // do something here?
+            console.log(data);
+          });
+          // display table after delete
+          $.post("http://localhost:8080/admin/search",{
+            // we don't care first 2 parameter so send whatever
+            // but the 3rd one we need to send from delete field
+            item:  $("#item-field-search").val(),
+            filter:$("#filter-field-search").val(),
+            table: $("#table-field-delete").val(),
+            searchtype: "display-all"
+          },function(data,status){
+            // if return data error then drop it and alert
+            if (data=='error') {
+              alert("query error");
+              return;
+            }
+
+            // reset rowcount and tablehead buffer
+            rowcount = 0;
+            tablehead = [];
+            buffer = [];
+            // data[0] is sample row
+            // we pick it here to get tablehead
+            for(x in data[0]){
+              tablehead.push(x);
+            }
+            console.log(tablehead);
+            // reset all 10 column tablehead to blank
+            $("#display-table thead").html(
+                '<tr><th id="table-head-0"></th>'
+                  +'<th id="table-head-1"></th>'
+                  +'<th id="table-head-2"></th>'
+                  +'<th id="table-head-3"></th>'
+                  +'<th id="table-head-4"></th>'
+                  +'<th id="table-head-5"></th>'
+                  +'<th id="table-head-6"></th>'
+                  +'<th id="table-head-7"></th>'
+                  +'<th id="table-head-8"></th>'
+                  +'<th id="table-head-9"></th></tr>'
+              );
+              for(var i=0; i<tablehead.length; i+=1) {
+              $("#table-head-"+i).html(tablehead[i]);
+            }
+              // clear table body and rememorize table name
+            $("#display-table tbody").html('');
+            tablename = $("#table-field-search").val();
+
+            // for each object in data > data[z]
+            for(var z=0; z<data.length; z+=1) {
+              // then append a blank row
+              $("#display-table").append(
+                  '<tr><td id="td-'+rowcount+'-0"></td>'
+                    +'<td id="td-'+rowcount+'-1"></td>'
+                    +'<td id="td-'+rowcount+'-2"></td>'
+                    +'<td id="td-'+rowcount+'-3"></td>'
+                    +'<td id="td-'+rowcount+'-4"></td>'
+                    +'<td id="td-'+rowcount+'-5"></td>'
+                    +'<td id="td-'+rowcount+'-6"></td>'
+                    +'<td id="td-'+rowcount+'-7"></td>'
+                    +'<td id="td-'+rowcount+'-8"></td>'
+                    +'<td id="td-'+rowcount+'-9"></td></tr>'
+                );
+              // loop to change each data cell in blank row
+              for(var i=0; i<tablehead.length; i+=1) {
+                $('#td-'+rowcount+'-'+i).html(data[z][tablehead[i]]);
+              }
+              // push to buffer to memorize it already in table
+              buffer.push(data[z][tablehead[0]]);
+              rowcount +=1;
+            }
+
+          });
+
+        });
+
+        $("#insert-button").click(function(){
+          event.preventDefault();
+
+          // blank detector
+          if ($("#usertype-field-insert").val()=='Select Type'
+            || $("#idno-field-insert").val()==''
+            || $("#fname-field-insert").val()==''
+            || $("#lname-field-insert").val()==''
+            || $("#fname-field-insert").val()==''
+            || ( $("#sex-field-insert").val()!='M'
+              && $("#sex-field-insert").val()!='F')
+            || $("#id-field-insert").val()==''
+            || $("#bdate-field-insert").val()==''
+            || $("#address-field-insert").val()==''
+            || $("#password-field-insert").val()==''
+            || $("#faculty-field-insert").val()==''
+            || $("#department-field-insert").val()=='') {
+              alert("Insert all avaliable boxes to use 'insert' function.");
+              return;
+          }
+
+          // grade and register type can't blank
+          // when candidate was selected
+          // console.log($("#usertype-field-insert").val());
+          if ($("#usertype-field-insert").val()=='Candidate'
+            && ($("#grade-field-insert").val()==''
+            || $("#register-type-field-insert").val()=='')){
+              alert("Insert grade and register-type to use insert function for candidate.");
+              return;
+          }
+
+          $.post("http://localhost:8080/admin/insert",{
+            usertype: $("#usertype-field-insert").val(),
+            idno: $("#idno-field-insert").val(),
+            fname: $("#fname-field-insert").val(),
+            lname: $("#lname-field-insert").val(),
+            sex: $("#sex-field-insert").val(),
+            phoneno: $("#phoneno-field-insert").val(),
+            address: $("#address-field-insert").val(),
+            bdate: $("#bdate-field-insert").val(),
+            id: $("#id-field-insert").val(),
+            password: $("#password-field-insert").val(),
+            grade: $("#grade-field-insert").val(),
+            registertype: $("#register-type-field-insert").val(),
+            facultyname: $("#faculty-field-insert").val(),
+            departmentname: $("#department-field-insert").val(),
+            salary: $("#salary-field-insert").val()
+          },function(data,status){
+            // do something here?
+            alert(data);
+            console.log(data);
+          });
+        });
+
+      });
+     </script>
+  </body>
+
+
+</html>

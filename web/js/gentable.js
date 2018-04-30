@@ -2,108 +2,171 @@ var used = [];
 var usedResgister = [];
 var usedWithdrawn = [];
 var retval = [];
+var yearSemester = [];
+var nowYear = "2018";
+var nowSemester = "second";
+var stdID = "5830138021"
+
 $(document).ready(function(){
-  $("#button").click(function(){
-    event.preventDefault();
-    $.post("http://localhost:8080/student/searchbyid",{IDNo: $("#IDNo").val() }, function(data, status){
-      var message = "Submitted!";
-      if(data.length<1) {
-        alert("404: Found Nothing");
-        return;
-      }
-      if(used.indexOf(data[0].IDNo)>-1) {alert("Data already in table");return;}
-      alert(message);
-      var rowCount = $('#table tr').length;
-        $("#table").append(`<tr><td id="IDNo${rowCount}"></td>`
-                               +`<td id="Fname${rowCount}"></td>`
-                               +`<td id="Lname${rowCount}"></td>`
-                               +`<td id="Sex${rowCount}"></td>`
-                               +`<td id="BirthDate${rowCount}"></td>`
-                               +`<td id="Address${rowCount}"></td>`
-                               +`<td id="PhoneNo${rowCount}"></td></tr>`);
-        $("#IDNo"+rowCount).html(data[0].IDNo);
-        $("#Fname"+rowCount).html(data[0].Fname);
-        $("#Lname"+rowCount).html(data[0].Lname);
-        $("#Sex"+rowCount).html(data[0].Sex);
-        $("#BirthDate"+rowCount).html(data[0].BirthDate);
-        $("#Address"+rowCount).html(data[0].Address);
-        $("#PhoneNo"+rowCount).html(data[0].PhoneNo);
-        used.push(data[0].IDNo);
-    });
-  });
 
   $("#withdrawnBtn").click(function(){
     event.preventDefault();
       // function Check used
       if(usedWithdrawn.indexOf($("#WidthdrawnCourseID").val())>-1) {alert("Data already withdrawn");return;}
-      alert("Withdrawn course : " + $("#WidthdrawnCourseID").val());
+      alert("Withdrawn course success");
       withdrawnOperation();
-        for(var i=0;i<retval.length;i++){
-        $("#Grade"+retval[i]).html("W");
-        }
+      genTableRegister();
+      genTableWithdrawn()
+        //need change W function !!!!!
         usedWithdrawn.push($("#WidthdrawnCourseID").val());
-  // });
-});
+
+  });
 
   $("#WidthdrawnCourseID").on("keyup", function() {
-    filterTable("WidthdrawnCourseID","myTable",1);});
+    filterTable("WidthdrawnCourseID","bodyTableWithdrawn",1);});
 
   $("#studentIDAssignGrade").on("keyup",function() {filterTable("studentIDAssignGrade","assignGradeTable",1)});
   $("#eduOfStuID").on("keyup",function() {filterTable("eduOfStuID","educationStudentTable",1)});
 
   genTableEduHeader();
-  genTableEduContent();
   genEducationTeacherTable();
   genTranscriptTable("completedTable");
   genTranscriptTable("progressTable");
 }); //End document ready
 
-
+function startFunction(){
+  $.get("http://localhost:8080/login/getuserid",function(data,status){
+    var username = data['username'];
+    $("#id").text($("#id").text()+username);
+    console.log(username);
+    // document.getElementById('id').innerHTML = username;
+  });
+}
 
 function genTableRegister() {
     event.preventDefault();
-    $.post("http://localhost:8080/student/searchbycourseid",{CourseID: $("#validationCourse").val() }, function(data, status){
-      console.log($("#validationCourse").val());
-      if(data.length<1) {
-        alert("404: Found Nothing");
+    $("#bodyTableRegister").empty();
+    var tablehead = ["#","CourseNo","CourseName","Section","Credit","Grade"];
+    var buffer = [];
+    var rowcount = 0;
+    $.post("http://localhost:8080/student/search",{
+      item: stdID,
+      filter:"StudentID",
+      table: "Enroll natural join Course",
+      searchtype: "filter-search"
+    },function(data,status){
+      // if return data error then drop it and alert
+      console.log(data);
+      if (data=='error') {
+        alert("query error.");
         return;
       }
-  var courseNoValue = data[0].CourseID;
-  var sectionValue = data[0].Section;
-    if(usedResgister.indexOf(courseNoValue)>-1) {alert("Course already register");return;}
-    alert("Course No :"+courseNoValue+"  Section :"+sectionValue+" is added");
-    var rowCount = $('#tableRegister tr').length;
-      $("#tableRegister").append(`<tr><td id="No${rowCount}"></td>`
-                             +`<td id="CourseID${rowCount}"></td>`
-                             +`<td id="CourseName${rowCount}"></td>`
-                             +`<td id="Section${rowCount}"></td>`
-                             +`<td id="Credit${rowCount}"></td>`
-                             +`<td id="Grade${rowCount}"></td></tr>`);
-                  $("#No"+rowCount).html(usedResgister.length+1);
-                  $("#CourseID"+rowCount).html(courseNoValue);
-                  $("#CourseName"+rowCount).html(data[0].CourseName);
-                  $("#Section"+rowCount).html(sectionValue);
-                  $("#Credit"+rowCount).html(data[0].Credit);
-                  $("#Grade"+rowCount).html("-");
-        $("#tableWithdrawn").append(`<tr><td id="No1${rowCount}"></td>`
-                              +`<td id="CourseID1${rowCount}"></td>`
-                              +`<td id="CourseName1${rowCount}"></td>`
-                              +`<td id="Section1${rowCount}"></td>`
-                              +`<td id="Credit1${rowCount}"></td></tr>`);
-                  $("#No1"+rowCount).html(usedResgister.length+1);
-                  $("#CourseID1"+rowCount).html(courseNoValue);
-                  $("#CourseName1"+rowCount).html(data[0].CourseName);
-                  $("#Section1"+rowCount).html(sectionValue);
-                  $("#Credit1"+rowCount).html(data[0].Credit);
-        usedResgister.push(courseNoValue);
-      });
+      if (data=='empty') {
+        alert("Course Not Found");
+        return;
+      }
+      for(var z=0; z<data.length; z+=1) {
 
+        var exist = true;
+        // if not 'all member of object data[z] already in table'
+        for(var x=0; x<buffer.length; x+=1) {
+          if (buffer[x] != data[z]["StudentID"]) exist = false;
+        }
+
+        // if no any object in buffer that mean nothing has ever in table
+        if (buffer.length<1) exist = false;
+
+        if (!exist) {
+          // Gen tableRegister
+          $("#tableRegister").append(
+          '<tr><td id="tr-'+rowcount+'-0"></td>'
+            +'<td id="tr-'+rowcount+'-1"></td>'
+            +'<td id="tr-'+rowcount+'-2"></td>'
+            +'<td id="tr-'+rowcount+'-3"></td>'
+            +'<td id="tr-'+rowcount+'-4"></td>'
+            +'<td id="tr-'+rowcount+'-5"></td></tr>'
+          );
+
+          // loop to change each data cell in blank row
+          $('#tr-'+rowcount+'-'+0).html(z+1);
+          for(var i=1; i<tablehead.length; i+=1) {
+            $('#tr-'+rowcount+'-'+i).html(data[z][tablehead[i]]);
+          }
+
+          // push to buffer to memorize it already in table
+          buffer.push(data[z][tablehead[0]]);
+          rowcount +=1;
+        }
+        else {
+            alert("Course already register.");
+        }
+      }
+  });
+}
+
+function genTableWithdrawn() {
+    event.preventDefault();
+    $("#bodyTableWithdrawn").empty();
+    var tablehead = ["#","CourseNo","CourseName","Section","Credit"];
+    var buffer = [];
+    var rowcount = 0;
+    $.post("http://localhost:8080/student/search",{
+      item: stdID,
+      filter:"StudentID",
+      table: "Enroll natural join Course",
+      searchtype: "filter-search"
+    },function(data,status){
+      // if return data error then drop it and alert
+      console.log(data);
+      if (data=='error') {
+        alert("query error.");
+        return;
+      }
+      if (data=='empty') {
+        alert("Course Not Found");
+        return;
+      }
+      for(var z=0; z<data.length; z+=1) {
+
+        var exist = true;
+        // if not 'all member of object data[z] already in table'
+        for(var x=0; x<buffer.length; x+=1) {
+          if (buffer[x] != data[z]["StudentID"]) exist = false;
+        }
+
+        // if no any object in buffer that mean nothing has ever in table
+        if (buffer.length<1) exist = false;
+
+        if (!exist) {
+          // Gen Table Withdrawn
+          $("#tableWithdrawn").append(
+          '<tr><td id="twd-'+rowcount+'-0"></td>'
+            +'<td id="twd-'+rowcount+'-1"></td>'
+            +'<td id="twd-'+rowcount+'-2"></td>'
+            +'<td id="twd-'+rowcount+'-3"></td>'
+            +'<td id="twd-'+rowcount+'-4"></td></tr>'
+          );
+
+          // loop to change each data cell in blank row
+          $('#twd-'+rowcount+'-'+0).html(z+1);
+          for(var i=1; i<tablehead.length; i+=1) {
+            $('#twd-'+rowcount+'-'+i).html(data[z][tablehead[i]]);
+          }
+
+          // push to buffer to memorize it already in table
+          buffer.push(data[z][tablehead[0]]);
+          rowcount +=1;
+        }
+        else {
+            alert("Course already register.");
+        }
+      }
+  });
 }
 
 function withdrawnOperation() {
         var value = $("#WidthdrawnCourseID").val().toLowerCase();
-
-        $("#myTable tr").filter(function() {
+        $("#bodyTableWithdrawn tr").filter(function() {
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
           if($(this).text().toLowerCase().indexOf(value) > -1){
             if(retval.indexOf($(this).text()[0])>-1) {alert("Course : No."+$(this).text()[0]+" is already Withdrawn");return;}
@@ -115,43 +178,101 @@ function withdrawnOperation() {
 }
 
 function genTableEduHeader(){
-  var sem = 2;
-    for(var i=1;i<4;i++){
-      if(sem==1){sem=2}
-      else sem=1;
-    $("#eduResTable").append('<table id="tableWithdrawn" class="table table-hover"> \
-    <h4 class="mt-5" style="text-align:left;">Semester '+sem+' Year 2018<h4> \
-      <thead> \
-      <tr> \
-        <th>Course No</th> \
-        <th>Course Name</th>\
-        <th>Credit</th>\
-        <th>Grade</th>\
-      </tr>\
-    </thead>\
-    <tbody id="eduResultTable'+i+'">\
-    </tbody>\
-      </table>')
+  // event.preventDefault();
+  // $("#eduResTable").empty();
+  console.log('bin',stdID);
+  var tablehead = ["Yyear","Semester"];
+  var buffer = [];
+  $.post("http://localhost:8080/student/callOverviewCourse",{
+    studentID: stdID
+  },function(data,status){
+    // if return data error then drop it and alert
+    console.log(data);
+    if (data=='error') {
+      alert("query error.");
+      return;
     }
+    if (data=='empty') {
+      alert("Education Result Not Found");
+      return;
+    }
+    for(var z=0; z<data.length; z+=1) {
+        // Gen tableRegister
+        $("#eduResTable").append('<table id="tableWithdrawn" class="table table-hover"> \
+        <h4 class="mt-5" style="text-align:left;">Semester '+data[z][tablehead[1]]+' Year '+data[z][tablehead[0]]+'<h4> \
+        <thead> \
+          <tr> \
+            <th>Course No</th> \
+            <th>Course Name</th>\
+            <th>Credit</th>\
+            <th>Grade</th>\
+          </tr>\
+        </thead>\
+        <tbody id="eduResultTable'+z+'">\
+        </tbody>\
+          </table>')
+
+          yearSemester.push(data[z][tablehead[0]]);
+          yearSemester.push(data[z][tablehead[1]]);
+      }
+      genTableEduContent();
+  });
 }
 function genTableEduContent(){
-  var CourseName1 = "Intro to law";
-  var CourseName2 = "Intro to database";
-  var Credit = "3";
-  var Grade = "A";
-  for(var i=1;i<4;i++){
-    $("#eduResultTable"+i).append(`<tr><td>${i}</td>\
-                           <td>${CourseName1}</td>\
-                           <td>${Credit}</td>\
-                           <td>${Grade}</td></tr>`);
-     $("#eduResultTable"+i).after(`<thead>
+  var tablehead = ["CourseNo","CourseName","Credit","Grade"];
+  var tablehead1 = ["Credit","Cumulative Credit","GPA","GPAX"];
+  var buffer = [];
+  var num = 0;
+  for(var i=0;i<yearSemester.length;i+=2){
+  $.post("http://localhost:8080/student/callPrintDetail",{
+    studentID: stdID,
+    year: yearSemester[i],
+    semester: yearSemester[i+1]
+  },function(data,status){
+    // if return data error then drop it and alert
+    if (data=='error') {
+      alert("query error.");
+      return;
+    }
+    if (data=='empty') {
+      alert("Education Result Not Found");
+      return;
+    }
+    num+=1;
+    for(var z=0; z<data.length; z+=1) {
+        // Gen tableRegister
+        $("#eduResultTable"+(num-1)).append('<tr><td>'+data[z][tablehead[0]]+'</td>\
+                               <td>'+data[z][tablehead[1]]+'</td>\
+                               <td>'+data[z][tablehead[2]]+'</td>\
+                               <td>'+data[z][tablehead[3]]+'</td></tr>');
+      }
+    });
+    $.post("http://localhost:8080/student/callPrintGrade",{
+      studentID: stdID,
+      year: yearSemester[i],
+      semester: yearSemester[i+1]
+    },function(data,status){
+      // if return data error then drop it and alert
+      console.log(data);
+      if (data=='error') {
+        alert("query error.");
+        return;
+      }
+      if (data=='empty') {
+        alert("Education Result Not Found");
+        return;
+      }
+      for(var z=0; z<data.length; z+=1) {
+     $("#eduResultTable"+(num-1)).after('<thead>\
                                   <tr style=" border-bottom-style: solid;border-bottom-width: 1px;border-bottom-color: rgb(221, 221, 221);line-height: 17px;background-color: rgba(237, 159, 40, 0.19);">\
-                                     <th scope="col">CA<div style="font-weight:normal;">3</div></th>\
-                                     <th scope="col">GPA<div style="font-weight:normal;">3</div></th>\
-                                     <th scope="col">CAX<div style="font-weight:normal;">30</div></th>\
-                                     <th scope="col">GPAX<div style="font-weight:normal;">3.25</div></th>\
+                                     <th scope="col">CA<div style="font-weight:normal;">'+data[z][tablehead1[0]]+'</div></th>\
+                                     <th scope="col">GPA<div style="font-weight:normal;">'+data[z][tablehead1[2]]+'</div></th>\
+                                     <th scope="col">CAX<div style="font-weight:normal;">'+data[z][tablehead1[1]]+'</div></th>\
+                                     <th scope="col">GPAX<div style="font-weight:normal;">'+data[z][tablehead1[3]]+'</div></th>\
                                    </tr>\
-                                   </thead>`);
+                                   </thead>');
+        }
+      });
   }
 }
 
