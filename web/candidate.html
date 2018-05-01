@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Candidate</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+  <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="/vendor/devicons/css/devicons.min.css" rel="stylesheet">
+  <link href="/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/css/resume.min.css" rel="stylesheet">
+</head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/gentable.js"></script>
+  <script>
+  var start = function(){
+    startFunction();
+    $(document).ready(function(){
+    genProfileCandidate();
+  //   genTableEduHeader();
+  //   genEducationTeacherTable();
+  //   genTranscriptTable("completedTable");
+  //   genTranscriptTable("progressTable");
+  });
+};
+    window.onload = start;
+  </script>
+  <style>
+  .borderless{
+    border:hidden;
+  }
+  .boldBlack{
+    font-weight: bold;
+    color: #343a40;
+  }
+  ::selection {
+  background: aquamarine;
+  }
+  </style>
+
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <span class="d-block d-lg-none">Start Bootstrap</span>
+        <span class="d-none d-lg-block">
+          <!-- <img class="img-fluid mx-auto mb-2" src="img/admission.png" alt=""> -->
+          <div class="container-fluid mx-auto">
+          <h2 class="mb-0">Reg<span style="color:#ddddd0">system</span>
+          </h2>
+          <hr style="border-width:3px;"></hr>
+        </div>
+        </span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#profile">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#status">Status</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#report">report</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container-fluid p-0">
+
+	  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="profile">
+        <div class="my-auto">
+          <h2 class="mb-5">Candidate Profile</h2>
+
+          <div class="d-flex flex-column flex-md-row mb-5" style="word-spacing: 5px;text-indent: 40px;font-size: 20px;">
+            <div class="resume-content" style=" width: 921.14px;">
+              <h3 style="font-size:200%;white-space:pre" id="fnameLnameC"></h3>
+              <hr></hr>
+              <div class="row">
+                <div class="mb-5" style=" white-space:pre-wrap;font-size:150%;margin-left: 14px;">ID Number :</div>
+                <div class="mb-5" style=" white-space:pre-wrap;font-size:150%;margin-left: -20px;" id="idC"></div>
+              </div>
+                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="sexC">Sex : </div>
+                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="birthDateC">Birth Date : </div>
+                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="addressC">Address : </div>
+                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="phoneNumberC">Phone Number : </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="status">
+        <div class="my-auto">
+          <h2 class="mb-5">Status</h2>
+          <h4 class="p-3" id="statusOfCandidate">This show status of candidate</h4>
+
+        </div>
+      </section>
+
+      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="report">
+        <div class="my-auto" >
+          <h2 class="mb-5">Report</h2>
+          <h4 class="p-3">  This show report of candidate</h4>
+          <iframe src="/report" style="border:none;height:400px;width:100%;"> </iframe>
+        </div>
+      </section>
+
+      <!-- END -->
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/resume.min.js"></script>
+
+  </body>
+
+
+</html>

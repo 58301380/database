@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Admission</title>
+  <title>Student</title>
 
   <!-- Bootstrap core CSS -->
   <link href="/vendor/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet">
@@ -22,18 +22,18 @@
 
   <!-- Custom styles for this template -->
   <link href="/css/resume.min.css" rel="stylesheet">
-
+</head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="/js/gentable.js"></script>
+  <script type="text/javascript" src="/js/gentable.js"></script>
   <script>
   var start = function(){
       startFunction();
       $(document).ready(function(){
       genProfile();
-      genTableEduHeader();
-      genEducationTeacherTable();
-      genTranscriptTable("completed");
-      genTranscriptTable("progressTable");
+    //   genTableEduHeader();
+    //   genEducationTeacherTable();
+    //   genTranscriptTable("completedTable");
+    //   genTranscriptTable("progressTable");
     });
     };
     window.onload = start;
@@ -50,7 +50,6 @@
   background: aquamarine;
   }
   </style>
-</head>
 
   <body>
 
@@ -60,7 +59,7 @@
         <span class="d-none d-lg-block">
           <!-- <img class="img-fluid mx-auto mb-2" src="img/admission.png" alt=""> -->
           <div class="container-fluid mx-auto">
-          <h2 class="mb-0">Admis<span style="color:#ddddd0">sion</span>
+          <h2 class="mb-0">Reg<span style="color:#ddddd0">system</span>
           </h2>
           <hr style="border-width:3px;"></hr>
         </div>
@@ -71,9 +70,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#home">Home</a>
-          </li>
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#profile">Profile</a>
           </li>
@@ -92,47 +88,11 @@
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="#transcript">Transcript</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#rank">Rank</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#report">report</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#eduOfStu">Education of student(teacher)</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="#AssignGrade">Assign Grade(teacher)</a>
-          </li>
         </ul>
       </div>
     </nav>
 
     <div class="container-fluid p-0">
-      <section class="resume-section p-3 p-lg-5 d-column d-flex flex-column" id="home">
-        <div class="my-auto">
-          <h2 class="mb-5">Home</h2>
-
-          <form id="form1" class="form-inline mb-3">
-          <div class="form-group mb-2">
-            <input type="text" name="IDNo" placeholder="Search for ID Number"id="IDNo" class="form-control">
-          </div>
-            <input class="btn btn-primary mb-2" type="submit" id="button">
-          </form>
-          <table id="table" class="table table-hover">
-            <tr>
-              <th>ID</th>
-              <th>Firstname</th>
-              <th>Lastname</th>
-              <th>Sex</th>
-              <th>BirthDate</th>
-              <th>Address</th>
-              <th>PhoneNo</th>
-            </tr>
-          </table>
-        </div>
-
-      </section>
 
 	  <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="profile">
         <div class="my-auto">
@@ -140,16 +100,16 @@
 
           <div class="d-flex flex-column flex-md-row mb-5" style="word-spacing: 5px;text-indent: 40px;font-size: 20px;">
             <div class="resume-content" style=" width: 921.14px;">
-              <h3 style="font-size:200%;white-space:pre">Firstname   Lastname</h3>
+              <h3 style="font-size:200%;white-space:pre" id="fnameLname"></h3>
               <hr></hr>
               <div class="row">
                 <div class="mb-5" style=" white-space:pre-wrap;font-size:150%;margin-left: 14px;">ID Number :</div>
                 <div class="mb-5" style=" white-space:pre-wrap;font-size:150%;margin-left: -20px;" id="id"></div>
               </div>
-                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="sex">Sex : gender</div>
-                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="birthDate">Birth Date : 1/1/2540</div>
-                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="address">Address : 112 m.6 10400</div>
-                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="phoneNumber">Phone Number : 0917497492</div>
+                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="sex">Sex : </div>
+                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="birthDate">Birth Date : </div>
+                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="address">Address : </div>
+                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="phoneNumber">Phone Number : </div>
             </div>
           </div>
 
@@ -177,7 +137,7 @@
               </div>
               <div class="col-md-2 mb-3">
                 <label for="validationSection">Section</label>
-                <input type="text" class="form-control" id="validationSection" placeholder="Section" value="" required>
+                <input type="text" class="form-control" name="section" id="validationSection" placeholder="Section" value="" required>
                 <div class="valid-feedback">
                   OK!
                 </div>
@@ -219,6 +179,7 @@
                   }
                   else {
                     event.preventDefault();
+                    insertEnroll();
                     genTableRegister();
                     genTableWithdrawn();
                   }
@@ -283,7 +244,7 @@
                     <p>This will withdrawn all course in this table now!!!</p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" id="withdrawnBtn" data-dismiss="modal" class="btn btn-primary">Confirm</button>
+                    <button type="button" id="withdrawnBtn" data-dismiss="modal" class="btn btn-primary" onclick="callWithdraw()">Confirm</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
                   </div>
@@ -330,14 +291,14 @@
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="transcript">
           <div class="my-auto">
             <h2 style=" margin-bottom: -10px;">Transcript</h2>
-            <h4 class="mb-4 text-muted" style=" text-transform: capitalize;letter-spacing: 1px;font-size: 27px;">Firstname Lastname</h4>
+            <h4 class="mb-4 text-muted" style=" text-transform: capitalize;letter-spacing: 1px;font-size: 27px;" id="transcriptName"></h4>
             <table class="table table-bordered" style=" text-align: center;" id="transcriptHeaderTable">
               <tbody >
                 <tr>
-                  <td scope="col">Enrolled<div class="boldBlack">3</div></td>
-                  <td scope="col">Complete<div class="boldBlack">2</div></td>
-                  <td scope="col">In Progress<div class="boldBlack">1</div></td>
-                  <td scope="col">Credited Earn<div class="boldBlack">0</div></td>
+                  <td scope="col">Enrolled<div class="boldBlack" id="enrolled"></div></td>
+                  <td scope="col">Complete<div class="boldBlack" id="completed"></div></td>
+                  <td scope="col">In Progress<div class="boldBlack" id="inprogress"></div></td>
+                  <td scope="col">Credited Earn<div class="boldBlack" id="creditEarn"></div></td>
                 </tr>
               </tbody>
             </table>
@@ -372,102 +333,6 @@
             </table>
           </div>
 
-      </section>
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="rank">
-        <div class="my-auto">
-          <h2 class="mb-5">Rank</h2>
-          <h4 class="p-3">This show rank of candidate</h4>
-          <iframe src="/rank" style="border:none;height:400px;width:100%;"> </iframe>
-
-        </div>
-      </section>
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="report">
-        <div class="my-auto" >
-          <h2 class="mb-5">Report</h2>
-          <h4 class="p-3">  This show report of candidate</h4>
-          <iframe src="/report" style="border:none;height:400px;width:100%;"> </iframe>
-        </div>
-      </section>
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="eduOfStu">
-        <div class="my-auto" >
-          <h2 class="mb-5">Education result of student</h2>
-          <div class="col-md-3" style=" position: relative;margin-left: 30px;margin-bottom: 66px;">
-            <input class="form-check-input" type="text" id="eduOfStuID" placeholder="Search for Student ID">
-          </div>
-          <div class="container-fluid">
-            <!-- <div class="table-responsive"> -->
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Student ID</th>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
-                  <th>Grade</th>
-                </tr>
-              </thead>
-              <tbody id="educationStudentTable">
-
-              </tbody>
-            </table>
-            </div>
-          <!-- </div> -->
-        </div>
-      </section>
-
-      <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="AssignGrade">
-        <div class="my-auto" >
-          <h2 class="mb-5">Assign Grade</h2>
-
-          <form class="mb-3" id="formAssignGrade">
-            <label for="inputGroupSelect">Select Subject</label>
-          <div class="input-group" style="width:50%;">
-            <select form="formAssignGrade" name="selectSubjectForm" class="custom-select" id="inputGroupSelect">
-              <option selected>Choose...</option>
-              <option value="Intro to Law">Intro to Law</option>
-              <option value="Intro to database">Intro to database</option>
-              <option value="SA">SA</option>
-            </select>
-            <div class="input-group-append">
-              <button class="btn btn-outline-primary" type="submit" onclick="genTableAssignGrade()">Gen Table</button>
-            </div>
-          </div>
-        </form>
-
-        <div class="container mb-3">
-          <div class="table-responsive">
-          <table class="table table-hover">
-            <thead>
-            <tr>
-              <th>#</th>
-              <th>Student ID</th>
-              <th>Section</th>
-              <th>Grade</th>
-            </tr>
-          </thead>
-          <tbody id="assignGradeTable">
-            <!-- content -->
-          </tbody>
-          </table>
-          </div>
-        </div>
-
-        <form id="submitAssignGrade">
-          <div class="form-row d-flex" style=" margin-left: 110px;">
-            <div class="col-md-2">
-              <input type="text" name="studentIDAssignGrade" class="form-control" id="studentIDAssignGrade" placeholder="Student ID">
-            </div>
-            <div class="col-md-2">
-              <input type="text" name="Grade" class="form-control" placeholder="Grade">
-            </div>
-            <button class="btn btn-outline-info" type="submit">Submit</button>
-          </div>
-        </form>
-
-        </div>
       </section>
 
       <!-- END -->

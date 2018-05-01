@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(session({
-  secret: "im",
+  secret: "imba",
   resave: false,
   saveUninitialized: false,
   cookie: {maxAge: 60*10*1000}

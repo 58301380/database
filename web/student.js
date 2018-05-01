@@ -3,6 +3,133 @@ var router = app.Router();
 var mysql = require('mysql');
 var con = require('./conn');
 
+router.post('/callTeacherTeachCourse', function(req,res){
+  let inteacherID = req.body.inteacherID;
+  let callQuery = `call TeacherTeachCourse('${inteacherID}');`;
+  console.log(callQuery);
+  con.query(callQuery, function(err, callresult) {
+    if (err) {
+      console.log(err);
+      res.send("error");
+      return;
+    }
+    if (callresult.length<1) {
+      res.send("empty");
+      return;
+    }
+    console.log(callresult[0]);
+    res.send(callresult[0]);
+  });
+  return;
+});
+
+router.post('/callupdateGrade', function(req,res){
+  let incourseNo = req.body.incourseNo;
+  let inSection = req.body.inSection;
+  let inStudentID = req.body.inStudentID;
+  let inGrade = req.body.inGrade;
+  let callQuery = `call updateGrade('${incourseNo}','${inSection}','${inStudentID}','${inGrade}');`;
+  console.log(callQuery);
+  con.query(callQuery, function(err, callresult) {
+    if (err) {
+      console.log(err);
+      res.send("error");
+      return;
+    }
+    if (callresult.length<1) {
+      res.send("empty");
+      return;
+    }
+    console.log(callresult[0]);
+    res.send(callresult[0]);
+  });
+  return;
+});
+
+router.post('/callviewStudent', function(req,res){
+  let Teacher = req.body.Teacher;
+  let cNumber = req.body.cNumber;
+  let callQuery = `call viewStudent('${Teacher}','${cNumber}');`;
+  console.log(callQuery);
+  con.query(callQuery, function(err, callresult) {
+    if (err) {
+      console.log(err);
+      res.send("error");
+      return;
+    }
+    if (callresult.length<1) {
+      res.send("empty");
+      return;
+    }
+    console.log(callresult[0]);
+    res.send(callresult[0]);
+  });
+  return;
+});
+
+router.post('/callstudentAdvise', function(req,res){
+  let inteacherID = req.body.inteacherID;
+  let callQuery = `call studentAdvise('${inteacherID}');`;
+  console.log(callQuery);
+  con.query(callQuery, function(err, callresult) {
+    if (err) {
+      console.log(err);
+      res.send("error");
+      return;
+    }
+    if (callresult.length<1) {
+      res.send("empty");
+      return;
+    }
+    console.log(callresult[0]);
+    res.send(callresult[0]);
+  });
+  return;
+});
+
+router.post('/callwithdraw', function(req,res){
+  let incourseNo = req.body.incourseNo;
+  let inStudentID = req.body.inStudentID;
+  let callQuery = `call withdraw('${incourseNo}','${inStudentID}');`;
+  console.log(callQuery);
+  con.query(callQuery, function(err, callresult) {
+    if (err) {
+      console.log(err);
+      res.send("error");
+      return;
+    }
+    if (callresult.length<1) {
+      res.send("empty");
+      return;
+    }
+    console.log(callresult[0]);
+    res.send(callresult[0]);
+  });
+  return;
+});
+
+router.post('/callInsertEnroll', function(req,res){
+  let incourseNo = req.body.incourseNo;
+  let inSection = req.body.inSection;
+  let inStudentID = req.body.inStudentID;
+  let callQuery = `call insertEnroll('${incourseNo}','${inSection}','${inStudentID}');`;
+  console.log(callQuery);
+  con.query(callQuery, function(err, callresult) {
+    if (err) {
+      console.log(err);
+      res.send("error");
+      return;
+    }
+    if (callresult.length<1) {
+      res.send("empty");
+      return;
+    }
+    console.log(callresult[0]);
+    res.send(callresult[0]);
+  });
+  return;
+});
+
 router.post('/callOverviewCourse', function(req,res){
   let studentID = req.body.studentID;
 
