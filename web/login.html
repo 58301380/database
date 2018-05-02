@@ -32,7 +32,7 @@
         },function(data, status){
           console.log(status);
           if (data == "success") {
-            var privilege = $("#typeSelection");
+            // var privilege = $("#typeSelection");
             // redirect here!
             // window.location.href='/login/student2';
             $.post("http://localhost:8080/login/student2",{
@@ -105,19 +105,30 @@
     }
 
   </style>
-
+  <style>
+      .my-button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100px;
+      }
+    </style>
 
   <form class="modal-content"method="post" action="/login/submit">
     <div class="container">
-      <input placeholder="Username" required name="username" id="usernameField" value="5830138021" type="text">
-      <input placeholder="Password" required name="password" id="passwordField" value="0000" type="password">
+      <input placeholder="Username" required name="username" id="usernameField"  type="text">
+      <input placeholder="Password" required name="password" id="passwordField"  type="password">
       <select name="usertype" id="typeSelection">
-        <option value="none">choose one</option>
-        <option selected value="student">Student</option>
-        <option value="personnel">Personnel</option>
+        <option hidden value="none">choose one</option>
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+        <option value="candidate">Candidate</option>
         <option value="administrator">Administrator</option>
       </select><br>
-      <input type="submit" >Login</button>
+      <input type="submit" class="my-button">
       <!-- id="loginButton" -->
     </div>
   </form>

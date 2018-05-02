@@ -25,19 +25,6 @@
 </head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="/js/gentable.js"></script>
-  <script>
-  var start = function(){
-    startFunction();
-    $(document).ready(function(){
-    genProfileTeacher();
-  //   genTableEduHeader();
-  //   genEducationTeacherTable();
-  //   genTranscriptTable("completedTable");
-  //   genTranscriptTable("progressTable");
-  });
-};
-    window.onload = start;
-  </script>
   <style>
   .borderless{
     border:hidden;
@@ -109,8 +96,8 @@
       </section>
 
 
-
-        <div class="my-auto" >
+    <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="eduOfStu">
+        <div class="my-auto">
           <h2 class="mb-5">Education result of student</h2>
           <div class="col-md-3" style=" position: relative;margin-left: 30px;margin-bottom: 66px;">
             <input class="form-check-input" type="text" id="eduOfStuID" placeholder="Search for Student ID">
@@ -144,8 +131,7 @@
             <label for="inputGroupSelect">Select Subject</label>
           <div class="input-group" style="width:50%;">
             <select form="formAssignGrade" name="selectSubjectForm" class="custom-select" id="inputGroupSelect">
-              <option selected>Choose...</option>
-              <option selected>Intro to Database</option>
+              <option selected value="null">Choose...</option>
             </select>
             <div class="input-group-append">
               <button class="btn btn-outline-primary" type="submit" onclick="genTableAssignGrade()">Gen Table</button>
@@ -177,9 +163,9 @@
               <input type="text" name="studentIDAssignGrade" class="form-control" id="studentIDAssignGrade" placeholder="Student ID">
             </div>
             <div class="col-md-2">
-              <input type="text" name="Grade" class="form-control" placeholder="Grade">
+              <input type="text" name="Grade" class="form-control" placeholder="Grade" id="gradeAssignGrade">
             </div>
-            <button class="btn btn-outline-info" type="submit">Submit</button>
+            <button class="btn btn-outline-info" type="submit" onclick="assignGrade()">Submit</button>
           </div>
         </form>
 

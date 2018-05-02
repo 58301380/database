@@ -25,19 +25,6 @@
 </head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="/js/gentable.js"></script>
-  <script>
-  var start = function(){
-    startFunction();
-    $(document).ready(function(){
-    genProfileCandidate();
-  //   genTableEduHeader();
-  //   genEducationTeacherTable();
-  //   genTranscriptTable("completedTable");
-  //   genTranscriptTable("progressTable");
-  });
-};
-    window.onload = start;
-  </script>
   <style>
   .borderless{
     border:hidden;
@@ -94,10 +81,13 @@
               <h3 style="font-size:200%;white-space:pre" id="fnameLnameC"></h3>
               <hr></hr>
               <div class="row">
-                <div class="mb-5" style=" white-space:pre-wrap;font-size:150%;margin-left: 14px;">ID Number :</div>
+                <div class="mb-5" style=" white-space:pre-wrap;font-size:150%;margin-left: 14px;">Candidate ID :</div>
                 <div class="mb-5" style=" white-space:pre-wrap;font-size:150%;margin-left: -20px;" id="idC"></div>
               </div>
+                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="idNoC">ID number : </div>
                 <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="sexC">Sex : </div>
+                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="gradeC">Grade : </div>
+                <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="testResultC">Test Result : </div>
                 <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="birthDateC">Birth Date : </div>
                 <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="addressC">Address : </div>
                 <div class="mb-5" style="white-space:pre-wrap;font-size:150%;" id="phoneNumberC">Phone Number : </div>
@@ -111,8 +101,12 @@
       <section class="resume-section p-3 p-lg-5 d-flex flex-column" id="status">
         <div class="my-auto">
           <h2 class="mb-5">Status</h2>
-          <h4 class="p-3" id="statusOfCandidate">This show status of candidate</h4>
-
+          <div class="container">
+            <div class="row">
+                <h4 class="p-1 mb-3" style="word-spacing:4px;">Status of candidate : </h4>
+                <div class="p-1 mb-3" id="statusOfCandidate" style=" font-size: 19px;"></div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -120,7 +114,23 @@
         <div class="my-auto" >
           <h2 class="mb-5">Report</h2>
           <h4 class="p-3">  This show report of candidate</h4>
-          <iframe src="/report" style="border:none;height:400px;width:100%;"> </iframe>
+          <div class="container-fluid">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Subject</th>
+                  <th>Buliding</th>
+                  <th>Room</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Test Score</th>
+                </tr>
+              </thead>
+              <tbody id="reportTable">
+
+              </tbody>
+            </table>
+            </div>
         </div>
       </section>
 

@@ -3,6 +3,46 @@ var router = app.Router();
 var mysql = require('mysql');
 var con = require('./conn');
 
+router.post('/callviewSubject', function(req,res){
+  let CandidateID = req.body.CandidateID;
+  let callQuery = `call viewSubject('${CandidateID}');`;
+  console.log(callQuery);
+  con.query(callQuery, function(err, callresult) {
+    if (err) {
+      console.log(err);
+      res.send("error");
+      return;
+    }
+    if (callresult.length<1) {
+      res.send("empty");
+      return;
+    }
+    console.log(callresult[0]);
+    res.send(callresult[0]);
+  });
+  return;
+});
+
+router.post('/callPrintCandidateStatus', function(req,res){
+  let CandidateID = req.body.CandidateID;
+  let callQuery = `call PrintCandidateStatus('${CandidateID}');`;
+  console.log(callQuery);
+  con.query(callQuery, function(err, callresult) {
+    if (err) {
+      console.log(err);
+      res.send("error");
+      return;
+    }
+    if (callresult.length<1) {
+      res.send("empty");
+      return;
+    }
+    console.log(callresult[0]);
+    res.send(callresult[0]);
+  });
+  return;
+});
+
 router.post('/callTeacherTeachCourse', function(req,res){
   let inteacherID = req.body.inteacherID;
   let callQuery = `call TeacherTeachCourse('${inteacherID}');`;
@@ -89,8 +129,9 @@ router.post('/callstudentAdvise', function(req,res){
 
 router.post('/callwithdraw', function(req,res){
   let incourseNo = req.body.incourseNo;
+  let inSection = req.body.inSection;
   let inStudentID = req.body.inStudentID;
-  let callQuery = `call withdraw('${incourseNo}','${inStudentID}');`;
+  let callQuery = `call withdraw('${incourseNo}','${inSection}','${inStudentID}');`;
   console.log(callQuery);
   con.query(callQuery, function(err, callresult) {
     if (err) {
@@ -310,12 +351,8 @@ router.get('/', function(req, res){
   res.sendfile('./index.html');
 })
 
-router.get('/rank',function(req,res){
-  res.sendFile('./rank.html');
-});
-
 router.get('/report',function(req,res){
-  res.sendFile(path.join(__dirname+'/report.html'));
+  res.sendfile('./report.html');
 });
 
 module.exports = router;

@@ -6,7 +6,7 @@ var con = require('./conn');
 router.post('/search', function(req, res){
   let searchtype = req.body.searchtype;
   let table = req.body.table;
-  
+
   if (searchtype=="filter-search") {
     let item = req.body.item;
     let filter = req.body.filter;
@@ -19,7 +19,6 @@ router.post('/search', function(req, res){
         return;
       }
       if (searchresult.length<1) {
-        res.send("empty");
         return;
       }
       res.send(searchresult);

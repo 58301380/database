@@ -25,19 +25,6 @@
 </head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="/js/gentable.js"></script>
-  <script>
-  var start = function(){
-      startFunction();
-      $(document).ready(function(){
-      genProfile();
-    //   genTableEduHeader();
-    //   genEducationTeacherTable();
-    //   genTranscriptTable("completedTable");
-    //   genTranscriptTable("progressTable");
-    });
-    };
-    window.onload = start;
-  </script>
   <style>
   .borderless{
     border:hidden;
@@ -180,7 +167,6 @@
                   else {
                     event.preventDefault();
                     insertEnroll();
-                    genTableRegister();
                     genTableWithdrawn();
                   }
                   form.classList.add('was-validated');
@@ -227,7 +213,7 @@
             <h2 class="mb-5">Withdrawn</h2>
 
             <div class="form-inline mb-3">
-            <input name="CourseID" id="WidthdrawnCourseID" type="text" placeholder="Search for Course Number">
+            <input name="CourseID" id="WidthdrawnCourseID" type="text" placeholder="Search for Course Number" required>
             <!-- Withdrawn Button-->
             <button class="btn btn-outline-danger ml-2"  data-toggle="modal" data-target="#withdrawnModal">Withdrawn Course</button>
             <!--  Modal -->
@@ -241,7 +227,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <p>This will withdrawn all course in this table now!!!</p>
+                    <p>Are you sure to withdraw!!!</p>
                   </div>
                   <div class="modal-footer">
                     <button type="button" id="withdrawnBtn" data-dismiss="modal" class="btn btn-primary" onclick="callWithdraw()">Confirm</button>

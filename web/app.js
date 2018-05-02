@@ -6,6 +6,9 @@ var app = express();
 var server = http.createServer(app);
 var bodyParser = require('body-parser');
 var studentData = require('./student');
+var routePage = require('./login');
+// var teacherpage = require('./teacher');
+// var candidatepage = require('./candidate');
 var adminpage = require('./admin');
 var session = require('express-session');
 
@@ -27,7 +30,10 @@ app.use(session({
 
 app.use('/admin',adminpage);
 app.use('/student',studentData);
-app.use('/login',require('./login'));
+app.use('/teacher',studentData);
+app.use('/candidate',studentData);
+app.use('/login',routePage);
+app.use('/',routePage);
 
 // Only LocalHost
 app.use('/*/vendor', express.static('vendor'));
@@ -35,8 +41,8 @@ app.use('/*/js', express.static('js'));
 app.use('/vendor', express.static('vendor'));
 app.use('/css',express.static('css'));
 app.use('/js',express.static('js'));
-app.use('/rank',express.static('rank.html'));
-app.use('/report',express.static('report.html'));
+// app.use('/rank',express.static('rank.html'));
+// app.use('/report',express.static('report.html'));
 
 app.listen(8080, () =>{
   console.log("Start server at port 8080!");
